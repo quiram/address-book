@@ -8,6 +8,7 @@ public class Persons {
 
 	public Persons(Collection<String> lines) {
 		persons = new ArrayList<Person>();
+
 		for (String line : lines) {
 			persons.add(new Person(line));
 		}
@@ -19,6 +20,7 @@ public class Persons {
 
 	public int getMaleCount() {
 		int total = 0;
+		
 		for (Person person : persons) {
 			if (person.getGender() == Gender.MALE) {
 				total++;

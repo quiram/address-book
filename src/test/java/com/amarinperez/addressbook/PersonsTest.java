@@ -1,47 +1,48 @@
 package com.amarinperez.addressbook;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class PersonsTest {
 
 	@Test
-	public void zeroCountOnEmptyPersons()
-	{
-		List<String> lines = new LinkedList<String>();
-		
-		Persons persons = new Persons(lines);
+	public void zeroCountOnEmptyPersons() {
+		Persons persons = getEmptyPersonsCollection();
 		assertEquals(0, persons.getCount());
 	}
-	
+
 	@Test
-	public void oneCountOnOnePerson()
-	{
-		List<String> lines = new LinkedList<String>();
-		lines.add("name, male");
-		Persons persons = new Persons(lines);
+	public void oneCountOnOnePerson() {
+		Persons persons = getPersonsCollectionWithOneOf("male");
 		assertEquals(1, persons.getCount());
 	}
-	
+
 	@Test
-	public void getMaleCountWithOneMale()
-	{
-		List<String> lines = new LinkedList<String>();
-		lines.add("name, male");
-		Persons persons = new Persons(lines);
+	public void getMaleCountWithOneMale() {
+		Persons persons = getPersonsCollectionWithOneOf("male");
 		assertEquals(1, persons.getMaleCount());
 	}
-	
+
 	@Test
-	public void getMaleCountWithOneFemale()
-	{
-		List<String> lines = new LinkedList<String>();
-		lines.add("name, female");
-		Persons persons = new Persons(lines);
+	public void getMaleCountWithOneFemale() {
+		Persons persons = getPersonsCollectionWithOneOf("female");
 		assertEquals(0, persons.getMaleCount());
+	}
+
+	private Persons getEmptyPersonsCollection() {
+		List<String> lines = new LinkedList<String>();
+		Persons persons = new Persons(lines);
+		return persons;
+	}
+
+	private Persons getPersonsCollectionWithOneOf(String gender) {
+		List<String> lines = new LinkedList<String>();
+		lines.add("name, " + gender);
+		Persons persons = new Persons(lines);
+		return persons;
 	}
 }
