@@ -32,17 +32,6 @@ public class PersonTest {
 	}
 	
 	@Test
-	public void testCreateIfGoodMaleInput() {
-		createPerson("male");
-	}
-
-	@Test
-	public void testCreateIfGoodFemaleInput()
-	{
-		createPerson("female");
-	}
-
-	@Test
 	public void getMaleGender()
 	{
 		Person person = createPerson("male");
