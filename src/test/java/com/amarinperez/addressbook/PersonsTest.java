@@ -32,7 +32,7 @@ public class PersonsTest {
 		Persons persons = getPersonsCollectionWithOneOf(Gender.FEMALE);
 		assertEquals(0, persons.getMaleCount());
 	}
-
+	
 	private Persons getEmptyPersonsCollection() {
 		List<String> lines = new LinkedList<String>();
 		Persons persons = new Persons(lines);
