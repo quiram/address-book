@@ -15,20 +15,23 @@ public class AddressBookLineBuilder {
 		return String.join(SEPARATOR, name, gender, dateOfBirth);
 	}
 
-	public void setGender(Gender gender) {
+	public AddressBookLineBuilder setGender(Gender gender) {
 		this.gender = gender.toString().toLowerCase();
-
+		return this;
 	}
 
-	public void setGender(String gender) {
+	public AddressBookLineBuilder setGender(String gender) {
 		this.gender = gender;
+		return this;
 	}
 
-	public void setDateOfBirth(String dateOfBirth) {
+	public AddressBookLineBuilder setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+		return this;
 	}
 
-	public void setName(String name) {
+	public AddressBookLineBuilder setName(String name) {
 		this.name = name;
+		return this;
 	}
 }
