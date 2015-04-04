@@ -24,36 +24,23 @@ public class Person {
 		setDateOfBirth();
 	}
 
-	private void setName() {
-		name = elements[0];
+	public String getName() {
+		return name;
 	}
 
-	private void setDateOfBirth() {
-		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-
-		try {
-			dateOfBirth = LocalDate.parse(elements[2].trim(), dateFormat);
-		}
-		catch (DateTimeParseException e) {
-			throwIllegalArgumentExcpetion("date of birth", line);
-		}
+	public Gender getGender() {
+		return gender;
 	}
 
-	private void setGender() {
-		try {
-			gender = Gender.valueOf(elements[1].trim().toUpperCase());
-		}
-		catch (IllegalArgumentException e) {
-			throwIllegalArgumentExcpetion("gender", line);
-		}
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
 	}
 
 	private String[] splitLine() {
-		if(line.trim().equals(""))
-		{
+		if (line.trim().equals("")) {
 			throwIllegalArgumentExcpetion("name", line);
 		}
-		
+
 		String[] elements = line.split(",");
 
 		if (elements.length < 2) {
@@ -70,16 +57,27 @@ public class Person {
 		throw new IllegalArgumentException(format("No valid %s in '%s'.", offendingParameter, line));
 	}
 
-	public Gender getGender() {
-		return gender;
-
+	private void setName() {
+		name = elements[0];
 	}
 
-	public LocalDate getDateOfBirth() {
-		return dateOfBirth;
+	private void setGender() {
+		try {
+			gender = Gender.valueOf(elements[1].trim().toUpperCase());
+		}
+		catch (IllegalArgumentException e) {
+			throwIllegalArgumentExcpetion("gender", line);
+		}
 	}
 
-	public String getName() {
-		return name;
+	private void setDateOfBirth() {
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+		try {
+			dateOfBirth = LocalDate.parse(elements[2].trim(), dateFormat);
+		}
+		catch (DateTimeParseException e) {
+			throwIllegalArgumentExcpetion("date of birth", line);
+		}
 	}
 }
