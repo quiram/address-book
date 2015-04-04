@@ -48,6 +48,4 @@ public class PersonTest {
 	private Person createPerson(String gender) {
 		return new Person("name, " + gender);
 	}
-	
-	
 }
