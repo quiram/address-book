@@ -17,19 +17,19 @@ public class PersonsTest {
 
 	@Test
 	public void oneCountOnOnePerson() {
-		Persons persons = getPersonsCollectionWithOneOf("male");
+		Persons persons = getPersonsCollectionWithOneOf(Gender.MALE);
 		assertEquals(1, persons.getCount());
 	}
 
 	@Test
 	public void getMaleCountWithOneMale() {
-		Persons persons = getPersonsCollectionWithOneOf("male");
+		Persons persons = getPersonsCollectionWithOneOf(Gender.MALE);
 		assertEquals(1, persons.getMaleCount());
 	}
 
 	@Test
 	public void getMaleCountWithOneFemale() {
-		Persons persons = getPersonsCollectionWithOneOf("female");
+		Persons persons = getPersonsCollectionWithOneOf(Gender.FEMALE);
 		assertEquals(0, persons.getMaleCount());
 	}
 
@@ -39,9 +39,13 @@ public class PersonsTest {
 		return persons;
 	}
 
-	private Persons getPersonsCollectionWithOneOf(String gender) {
+	private Persons getPersonsCollectionWithOneOf(Gender gender){
 		List<String> lines = new LinkedList<String>();
-		lines.add("name, " + gender);
+	
+		AddressBookLineBuilder builder = new AddressBookLineBuilder();
+		builder.setGender(gender);
+		lines.add(builder.build());
+		
 		Persons persons = new Persons(lines);
 		return persons;
 	}
