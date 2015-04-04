@@ -18,16 +18,7 @@ public class Persons {
 		return persons.size();
 	}
 
-	public int getMaleCount() {
-		int total = 0;
-		
-		for (Person person : persons) {
-			if (person.getGender() == Gender.MALE) {
-				total++;
-			}
-		}
-
-		return total;
+	public long getMaleCount() {
+		return persons.stream().filter(p -> p.getGender() == Gender.MALE).count();
 	}
-
 }
