@@ -1,5 +1,6 @@
 package com.amarinperez.addressbook.persons;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -8,7 +9,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.amarinperez.addressbook.AddressBookLineBuilder;
 import com.amarinperez.addressbook.Gender;
@@ -16,6 +19,9 @@ import com.amarinperez.addressbook.Person;
 import com.amarinperez.addressbook.Persons;
 
 abstract public class OnePersonInPersonsCollectionTestBase {
+
+	@Rule
+	public ExpectedException onBadInput = ExpectedException.none();
 
 	protected Persons persons;
 
@@ -61,5 +67,13 @@ abstract public class OnePersonInPersonsCollectionTestBase {
 		assertEquals(FULL_NAME, person.getName());
 	}
 
+	@Test
+	public void failToFindSecondPerson()
+	{
+		onBadInput.expectMessage(containsString("Mike"));
+		
+		persons.getAgeDifferenceBetween(FIRST_NAME, "Mike");
+	}
+	
 	abstract protected Gender getGender();
 }
