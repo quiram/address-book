@@ -5,13 +5,15 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.amarinperez.addressbook.Gender;
-import com.amarinperez.addressbook.Persons;
 
 public class OneMalePersonsCollectionTest extends OnePersonInPersonsCollectionTestBase {
 	@Test
-	public void getMaleCountWithOneMale() {
-		Persons persons = getPersonsCollectionWithOneOf(Gender.MALE);
+	public void oneMaleInList() {
 		assertEquals(1, persons.getMaleCount());
 	}
 
+	@Override
+	protected Gender getGender() {
+		return Gender.MALE;
+	}
 }

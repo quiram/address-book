@@ -1,6 +1,6 @@
 package com.amarinperez.addressbook.persons;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
@@ -21,5 +21,10 @@ public class EmptyPersonsCollectionTest {
 	@Test
 	public void zeroCount() {
 		assertEquals(0, persons.getCount());
+	}
+
+	@Test
+	public void noOldestPerson() {
+		assertNull(persons.getOldestPerson());
 	}
 }
