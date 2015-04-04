@@ -18,6 +18,14 @@ public class App {
 		printLine();
 		printLine("2. Who is the oldest person in the address book?");
 		printLine(persons.getOldestPerson().getName());
+		
+		printLine();
+		printLine("3. How many days older is Bill than Paul?");
+		printLine(persons.getAgeDifferenceBetween("Bill", "Paul"));
+		
+		printLine();
+		printLine();
+		printLine("That will be all :-)");
 	}
 	
 	private static void printLine()
