@@ -4,7 +4,7 @@ public class AddressBookLineBuilder {
 
 	public static final String DEFAULT_NAME = "name";
 	public static final String DEFAULT_GENDER = "male";
-	public static final String DEFAULT_DATE_OF_BIRTH = "12/09/1985";
+	public static final String DEFAULT_DATE_OF_BIRTH = "12/09/85";
 	public static final String SEPARATOR = ", ";
 
 	private String name = DEFAULT_NAME;

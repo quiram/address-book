@@ -4,7 +4,9 @@ import static java.lang.String.format;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
 
 public class Person {
 
@@ -14,6 +16,8 @@ public class Person {
 	private String name;
 	private Gender gender;
 	private LocalDate dateOfBirth;
+
+	private static final String EXPECTED_DATE_FORMAT = "dd/MM/";
 
 	public Person(String line) {
 		this.line = line;
@@ -38,23 +42,27 @@ public class Person {
 
 	private String[] splitLine() {
 		if (line.trim().equals("")) {
-			throwIllegalArgumentExcpetion("name", line);
+			throwIllegalArgumentExcpetion("name");
 		}
 
 		String[] elements = line.split(",");
 
 		if (elements.length < 2) {
-			throwIllegalArgumentExcpetion("gender", line);
+			throwIllegalArgumentExcpetion("gender");
 		}
 
 		if (elements.length < 3) {
-			throwIllegalArgumentExcpetion("date of birth", line);
+			throwIllegalArgumentExcpetion("date of birth");
 		}
 		return elements;
 	}
 
-	private void throwIllegalArgumentExcpetion(String offendingParameter, String line) {
-		throw new IllegalArgumentException(format("No valid %s in '%s'.", offendingParameter, line));
+	private void throwIllegalArgumentExcpetion(String offendingParameter) {
+		throwIllegalArgumentExcpetion(offendingParameter, null);
+	}
+	
+	private void throwIllegalArgumentExcpetion(String offendingParameter, Exception e) {
+		throw new IllegalArgumentException(format("No valid %s in '%s'.", offendingParameter, line), e);
 	}
 
 	private void setName() {
@@ -66,18 +74,22 @@ public class Person {
 			gender = Gender.valueOf(elements[1].trim().toUpperCase());
 		}
 		catch (IllegalArgumentException e) {
-			throwIllegalArgumentExcpetion("gender", line);
+			throwIllegalArgumentExcpetion("gender");
 		}
 	}
 
 	private void setDateOfBirth() {
-		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();
+		builder.appendPattern(EXPECTED_DATE_FORMAT);
+		builder.appendValueReduced(ChronoField.YEAR, 2, 4, 1900);
+		
+		DateTimeFormatter dateFormat = builder.toFormatter();
 
 		try {
 			dateOfBirth = LocalDate.parse(elements[2].trim(), dateFormat);
 		}
 		catch (DateTimeParseException e) {
-			throwIllegalArgumentExcpetion("date of birth", line);
+			throwIllegalArgumentExcpetion("date of birth", e);
 		}
 	}
 }

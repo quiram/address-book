@@ -1,6 +1,9 @@
 package com.amarinperez.addressbook;
 
-import static com.amarinperez.addressbook.AddressBookLineBuilder.*;
+import static com.amarinperez.addressbook.AddressBookLineBuilder.DEFAULT_DATE_OF_BIRTH;
+import static com.amarinperez.addressbook.AddressBookLineBuilder.DEFAULT_GENDER;
+import static com.amarinperez.addressbook.AddressBookLineBuilder.DEFAULT_NAME;
+import static com.amarinperez.addressbook.AddressBookLineBuilder.SEPARATOR;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;

@@ -1,6 +1,9 @@
 package com.amarinperez.addressbook.person;
 
+import static org.hamcrest.Matchers.isA;
 import static org.hamcrest.core.StringContains.containsString;
+
+import java.time.format.DateTimeParseException;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -19,17 +22,15 @@ public class FailToCreatePersonTest extends PersonTestBase {
 	public void setup() {
 		builder = new AddressBookLineBuilder();
 	}
-	
+
 	@Test
-	public void noName()
-	{
+	public void noName() {
 		String line = "";
 		failToCreatePersonWith(line, "name");
 	}
-	
+
 	@Test
-	public void allSpace()
-	{
+	public void allSpace() {
 		String line = "   ";
 		failToCreatePersonWith(line, "name");
 	}
@@ -55,6 +56,7 @@ public class FailToCreatePersonTest extends PersonTestBase {
 	@Test
 	public void invalidDateOfBirth() {
 		builder.setDateOfBirth("not a date");
+		onBadString.expectCause(isA(DateTimeParseException.class));
 		failToCreatePersonWith(builder.build(), "date of birth");
 	}
 

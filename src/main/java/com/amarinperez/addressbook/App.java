@@ -10,11 +10,28 @@ public class App {
 		PersonsLoader personsLoader = new PersonsLoader("/AddressBook");
 		Persons persons = personsLoader.getPersons();
 		
-		System.out.println("GUMTREE CODING CHALLENGE");
-		System.out.println();
-		System.out.println("1. How many males are in the address book?");
-
-		System.out.println(persons.getMaleCount());
+		printLine("GUMTREE CODING CHALLENGE");
+		printLine();
+		printLine("1. How many males are in the address book?");
+		printLine(persons.getMaleCount());
+		
+		printLine();
+		printLine("2. Who is the oldest person in the address book?");
+		printLine(persons.getOldestPerson().getName());
+	}
+	
+	private static void printLine()
+	{
+		printLine("");
+	}
+	
+	private static void printLine(long l)
+	{
+		printLine(Long.toString(l));
 	}
 
+	private static void printLine(String line)
+	{
+		System.out.println(line);
+	}
 }
