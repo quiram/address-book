@@ -2,21 +2,12 @@ package com.amarinperez.addressbook.person;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import com.amarinperez.addressbook.AddressBookLineBuilder;
 import com.amarinperez.addressbook.Gender;
 import com.amarinperez.addressbook.Person;
 
-public class PersonGenderTest {
-	private AddressBookLineBuilder builder;
-
-	@Before
-	public void setup() {
-		builder = new AddressBookLineBuilder();
-	}
-
+public class PersonGenderTest extends PersonTestBase {
 	@Test
 	public void getMaleGender() {
 		Person person = createPerson("male");

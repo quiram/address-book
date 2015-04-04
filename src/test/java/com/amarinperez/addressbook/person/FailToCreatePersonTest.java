@@ -10,12 +10,10 @@ import org.junit.rules.ExpectedException;
 import com.amarinperez.addressbook.AddressBookLineBuilder;
 import com.amarinperez.addressbook.Person;
 
-public class FailToCreatePersonTest {
+public class FailToCreatePersonTest extends PersonTestBase {
 
 	@Rule
 	public ExpectedException onBadString = ExpectedException.none();
-	
-	private AddressBookLineBuilder builder;
 
 	@Before
 	public void setup() {
@@ -29,8 +27,7 @@ public class FailToCreatePersonTest {
 	}
 
 	@Test
-	public void noDateOfBirth()
-	{
+	public void noDateOfBirth() {
 		String line = "lalal, male";
 		failToCreatePersonWith(line, "date of birth");
 	}
@@ -40,13 +37,13 @@ public class FailToCreatePersonTest {
 		builder.setGender("loco");
 		failToCreatePersonWith(builder.build(), "gender");
 	}
-	
+
 	@Test
 	public void invalidDateOfBirth() {
 		builder.setDateOfBirth("not a date");
 		failToCreatePersonWith(builder.build(), "date of birth");
 	}
-	
+
 	private void failToCreatePersonWith(String line, String parameter) {
 		onBadString.expect(IllegalArgumentException.class);
 		onBadString.expectMessage(containsString(parameter));
