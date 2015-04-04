@@ -19,23 +19,24 @@ public class MultiplePeopleInPersonsCollectionTest {
 	private static final String NAME2 = "Guy month later";
 	private static final String DOB2 = "01/02/1990";
 
+	private List<String> lines;
 	private Persons persons;
 
 	@Before
 	public void setup() {
-		List<String> lines = new ArrayList<String>();
-		AddressBookLineBuilder builder = new AddressBookLineBuilder();
+		lines = new ArrayList<String>();
 
-		builder.setName(OLDEST_NAME).setDateOfBirth(OLDEST_DOB);
-		lines.add(builder.build());
-
-		builder.setName(NAME1).setDateOfBirth(DOB1);
-		lines.add(builder.build());
-
-		builder.setName(NAME2).setDateOfBirth(DOB2);
-		lines.add(builder.build());
+		addLine(OLDEST_NAME, OLDEST_DOB);
+		addLine(NAME1, DOB1);
+		addLine(NAME2, DOB2);
 
 		persons = new Persons(lines);
+	}
+
+	private void addLine(String name, String dateOfBirth) {
+		AddressBookLineBuilder builder = new AddressBookLineBuilder();
+		builder.setName(name).setDateOfBirth(dateOfBirth);
+		lines.add(builder.build());
 	}
 
 	@Test

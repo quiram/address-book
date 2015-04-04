@@ -15,6 +15,10 @@ import com.amarinperez.addressbook.Person;
 
 public class FailToCreatePersonTest extends PersonTestBase {
 
+	private static final String DATE_OF_BIRTH_FIELD = "date of birth";
+	private static final String GENDER_FIELD = "gender";
+	private static final String NAME_FIELD = "name";
+	
 	@Rule
 	public ExpectedException onBadString = ExpectedException.none();
 
@@ -25,39 +29,36 @@ public class FailToCreatePersonTest extends PersonTestBase {
 
 	@Test
 	public void noName() {
-		String line = "";
-		failToCreatePersonWith(line, "name");
+		failToCreatePersonWith("", NAME_FIELD);
 	}
 
 	@Test
 	public void allSpace() {
-		String line = "   ";
-		failToCreatePersonWith(line, "name");
+		failToCreatePersonWith("   ", NAME_FIELD);
 	}
 
 	@Test
 	public void noGender() {
-		String line = "lalala";
-		failToCreatePersonWith(line, "gender");
+		failToCreatePersonWith("lalala", GENDER_FIELD);
 	}
 
 	@Test
 	public void noDateOfBirth() {
-		String line = "lalal, male";
-		failToCreatePersonWith(line, "date of birth");
+		failToCreatePersonWith("lalal, male", DATE_OF_BIRTH_FIELD);
 	}
 
 	@Test
 	public void invalidGender() {
 		builder.setGender("loco");
-		failToCreatePersonWith(builder.build(), "gender");
+		failToCreatePersonWith(builder.build(), GENDER_FIELD);
 	}
 
 	@Test
 	public void invalidDateOfBirth() {
 		builder.setDateOfBirth("not a date");
 		onBadString.expectCause(isA(DateTimeParseException.class));
-		failToCreatePersonWith(builder.build(), "date of birth");
+		
+		failToCreatePersonWith(builder.build(), DATE_OF_BIRTH_FIELD);
 	}
 
 	private void failToCreatePersonWith(String line, String parameter) {
