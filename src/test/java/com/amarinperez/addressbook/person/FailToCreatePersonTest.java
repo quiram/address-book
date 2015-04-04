@@ -19,6 +19,20 @@ public class FailToCreatePersonTest extends PersonTestBase {
 	public void setup() {
 		builder = new AddressBookLineBuilder();
 	}
+	
+	@Test
+	public void noName()
+	{
+		String line = "";
+		failToCreatePersonWith(line, "name");
+	}
+	
+	@Test
+	public void allSpace()
+	{
+		String line = "   ";
+		failToCreatePersonWith(line, "name");
+	}
 
 	@Test
 	public void noGender() {
