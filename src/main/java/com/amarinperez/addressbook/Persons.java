@@ -24,10 +24,10 @@ public class Persons {
 	}
 
 	public Person getOldestPerson() {
-		if (persons.isEmpty()) {
-			return null;
-		}
+		return persons.stream().min(Comparator.comparing(p -> p.getDateOfBirth())).orElse(null);
+	}
 
-		return persons.stream().min(Comparator.comparing(person -> person.getDateOfBirth())).get();
+	public Person getPersonByName(String name) {
+		return persons.stream().filter(p -> p.getName().startsWith(name)).findFirst().orElse(null);
 	}
 }
