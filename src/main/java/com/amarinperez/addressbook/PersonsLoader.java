@@ -1,27 +1,26 @@
 package com.amarinperez.addressbook;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.util.List;
+
+import org.apache.commons.io.IOUtils;
 
 public class PersonsLoader {
 
 	List<String> lines;
 
 	public PersonsLoader(String location) {
-		URL fullPath = this.getClass().getResource(location);
+		InputStream locationInputStream = this.getClass().getResourceAsStream(location);
 
-		if (fullPath == null) {
+		if (locationInputStream == null) {
 			failToLoadFileBecauseOf(null);
 		}
 
 		try {
-			lines = Files.readAllLines(Paths.get(fullPath.toURI()));
+			lines = IOUtils.readLines(locationInputStream);
 		}
-		catch (IOException | URISyntaxException e) {
+		catch (IOException e) {
 			failToLoadFileBecauseOf(e);
 		}
 	}

@@ -1,5 +1,7 @@
 package com.amarinperez.addressbook;
 
+import static java.lang.String.format;
+
 public class Person {
 
 	private Gender gender;
@@ -8,19 +10,19 @@ public class Person {
 		String[] elements = line.split(",");
 
 		if (elements.length < 2) {
-			throwIllegalArgumentExcpetion();
+			throwIllegalArgumentExcpetion(line);
 		}
 
 		try {
 			gender = Gender.valueOf(elements[1].trim().toUpperCase());
 		}
 		catch (IllegalArgumentException e) {
-			throwIllegalArgumentExcpetion();
+			throwIllegalArgumentExcpetion(line);
 		}
 	}
 
-	private void throwIllegalArgumentExcpetion() {
-		throw new IllegalArgumentException("No valid gender.");
+	private void throwIllegalArgumentExcpetion(String line) {
+		throw new IllegalArgumentException(format("No valid gender in '%s'.", line));
 	}
 
 	public Gender getGender() {
